@@ -402,7 +402,6 @@ body.horizontal-activitybar .monaco-workbench .activitybar>.content :not(.monaco
 .custom-font-family-sidebar .sidebar .linux,
 .custom-font-family-sidebar .mac .sidebar,
 .custom-font-family-sidebar .linux .sidebar,
-.custom-font-family-sidebar .mawindowsc .sidebar {
+.custom-font-family-sidebar .windows .sidebar {
   font-family: var(--custom-font-family-sidebar)
 }
-
