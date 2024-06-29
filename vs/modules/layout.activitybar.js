@@ -143,7 +143,7 @@ define(
 
       exports.init = function () {
         try {
-          if (store.zenMode) { return; };
+          if (store.zenMode || !config.activityBar.isEnabled) { return; };
           const { size, position } = config.activityBar;
 
           if (!store.previousActivityBarConfig.position && position) {
