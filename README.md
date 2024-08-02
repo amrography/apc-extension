@@ -333,7 +333,7 @@ Specify the height and font size of list rows
     // 'settings-toc-wrapper', 'settings-tree-container', 'quick-input-list', 'monaco-table', 'select-box-dropdown-list-container', 'extensions-list', 'notifications-list-container'];
 
     "apc.listRow": {
-      "lists": ["explorer-folders-view", "results"], // dafault if height or fontSize are provided ['customview-tree', 'results', 'open-editors', 'explorer-folders-view', 'outline-tree', 'scm-view', 'debug-view-content', 'debug-breakpoints', 'tree']
+      "lists": ["explorer-folders-view", "results"], // default if height or fontSize are provided ['customview-tree', 'results', 'open-editors', 'explorer-folders-view', 'outline-tree', 'scm-view', 'debug-view-content', 'debug-breakpoints', 'tree']
       "height": number,
       "fontSize": number,
       // by individual list
