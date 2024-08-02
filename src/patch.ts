@@ -79,7 +79,6 @@ function restoreIframe() {
 
 export async function ensurePatch(context: vscode.ExtensionContext) {
   if (
-    !fs.existsSync(bootstrapBackupPath) ||
     !fs.readFileSync(bootstrapPath, "utf8")?.includes('vs/patch/main') ||
     !fs.readFileSync(mainJsPath, 'utf8')?.includes('require("./bootstrap-amd")') ||
     !fs.existsSync(workbenchHtmlReplacementPath) ||
@@ -94,43 +93,33 @@ export async function ensurePatch(context: vscode.ExtensionContext) {
 }
 
 function patchBootstrap(extensionPath: string) {
-  if (!fs.existsSync(bootstrapBackupPath)) {
-    // bkp bootstrap-amd.js
-    fs.renameSync(bootstrapPath, bootstrapBackupPath);
-  }
-
   // patch bootstrap-amd.js
-  const bootstrapResourcesPath = path.join(extensionPath, "resources", bootstrapName);
-  const inject = `
-  if (entrypoint === "vs/code/electron-main/main") {
-    const fs = nodeRequire('fs');
-    const p = nodeRequire('path');
-    const readFile = fs.readFile;
-    fs.readFile = function (path, options, callback) {
-      if (path.endsWith(p.join('electron-main', 'main.js'))) {
-        readFile(path, options, function () {
-          loader(["vs/patch/main"], console.log, console.log);
-          callback.apply(this, arguments);
-        });
-      }
-      else readFile(...arguments);
-    };
-  }
-  performance.mark('code/fork/willLoadCode');`;
-
-  const patchedbootstrapJs = fs.readFileSync(bootstrapResourcesPath, 'utf8')
-    // .replace('amdModulesPattern: \/^vs\\\/\/', `paths: { "apc": "${fixedPatchPath}" }`)
-    .replace(`performance.mark('code/fork/willLoadCode');`, inject);
-
-  fs.writeFile(bootstrapPath, patchedbootstrapJs, 'utf8', () => { });
-}
-
-function restoreBootstrap() {
-  if (!fs.existsSync(bootstrapBackupPath)) { return; }
-  // restore bootstrap-amd.js
-  fs.renameSync(bootstrapBackupPath, bootstrapPath);
-  // remove bkp bootstrap-amd.js
-  fs.rm(bootstrapBackupPath, () => { });
+  // const bootstrapResourcesPath = path.join(extensionPath, "resources", bootstrapName);
+  // const inject = `
+  // if (entrypoint === "vs/code/electron-main/main") {
+  //   const fs = nodeRequire('fs');
+  //   const p = nodeRequire('path');
+  //   const readFile = fs.readFile;
+  //   fs.readFile = function (path, options, callback) {
+  //     if (path.endsWith(p.join('electron-main', 'main.js'))) {
+  //       readFile(path, options, function () {
+  //         loader(["vs/patch/main"], console.log, console.log);
+  //         callback.apply(this, arguments);
+  //       });
+  //     }
+  //     else readFile(...arguments);
+  //   };
+  // }
+  // performance.mark('code/fork/willLoadCode');`;
+  // const patchedbootstrapJs = fs.readFileSync(bootstrapResourcesPath, 'utf8');
+  // .replace('amdModulesPattern: \/^vs\\\/\/', `paths: { "apc": "${fixedPatchPath}" }`)
+  // .replace(`performance.mark('code/fork/willLoadCode');`, inject);
+  
+  // fs.writeFile(bootstrapPath, patchedbootstrapJs, 'utf8', () => { });
+  fs.cpSync(path.join(extensionPath, "resources", bootstrapName), path.join(installationPath, bootstrapName));
+  fs.cpSync(path.join(extensionPath, "resources", 'bootstrap-meta.js'), path.join(installationPath, 'bootstrap-meta.js'));
+  fs.cpSync(path.join(extensionPath, "resources", 'bootstrap.js'), path.join(installationPath, 'bootstrap.js'));
+  fs.cpSync(path.join(extensionPath, "resources", 'performance.js'), path.join(installationPath, 'performance.js'));
 }
 
 function patchMain(extensionPath: string) {
@@ -251,7 +240,6 @@ export async function install(context: vscode.ExtensionContext) {
 }
 
 export function uninstallPatch() {
-  restoreBootstrap();
   restoreMain();
   restoreWorkbench();
   restoreIframe();
