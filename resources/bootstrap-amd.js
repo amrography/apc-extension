@@ -189,7 +189,7 @@ if (isESM) {
 		baseUrl: bootstrap.fileUriFromPath(__dirname, { isWindows: process.platform === 'win32' }),
 		catchError: true,
 		nodeRequire,
-		amdModulesPattern: /^vs\//,
+		// amdModulesPattern: /^vs\//,
 		recordStats: true
 	});
 

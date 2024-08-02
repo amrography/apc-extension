@@ -9,10 +9,10 @@ define(
       require(['vs/base/browser/ui/menu/menu'], classes.menu, traceError);
       require(['vs/base/browser/ui/list/listView'], classes.listView, traceError);
       require(['vs/base/browser/ui/menu/menubar'], classes.menubar, traceError);
+      require(['vs/base/browser/fonts'], classes.fonts, traceError);
 
       require(['vs/workbench/browser/workbench'], classes.workbench, traceError);
       require(['vs/workbench/browser/layout'], classes.layout, traceError);
-      require(['vs/workbench/browser/style'], classes.style, traceError);
 
       require(['vs/workbench/browser/parts/titlebar/menubarControl'], classes.menubarControl, traceError);
       require(['vs/workbench/browser/parts/editor/editorPart'], classes.editorPart, traceError);

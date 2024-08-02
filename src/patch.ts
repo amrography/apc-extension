@@ -79,7 +79,6 @@ function restoreIframe() {
 
 export async function ensurePatch(context: vscode.ExtensionContext) {
   if (
-    !fs.readFileSync(bootstrapPath, "utf8")?.includes('vs/patch/main') ||
     !fs.readFileSync(mainJsPath, 'utf8')?.includes('require("./bootstrap-amd")') ||
     !fs.existsSync(workbenchHtmlReplacementPath) ||
     !fs.existsSync(browserEntrypointPath) ||

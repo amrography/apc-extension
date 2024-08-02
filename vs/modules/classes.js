@@ -202,11 +202,11 @@ define(
         } catch (error) { traceError(error); }
       };
 
-      exports.style = function (style) {
+      exports.fonts = function (fonts) {
         try {
-          const [key] = findVariable(style, 'DEFAULT_FONT_FAMILY', 'string'); // the only one
-          const _DEFAULT_FONT_FAMILY = style[key];
-          Object.defineProperty(style, key, {
+          const [key] = findVariable(fonts, 'DEFAULT_FONT_FAMILY', 'string'); // the only one
+          const _DEFAULT_FONT_FAMILY = fonts[key];
+          Object.defineProperty(fonts, key, {
             get() {
               try {
                 return config.fontFamily.customFontFamily || _DEFAULT_FONT_FAMILY;
