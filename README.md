@@ -10,7 +10,7 @@ The Successor to iocave/Customize UI
 
 ## Overview
 
-This extension allows customization outside vscode scoop.
+This extension allows customization outside of vscode's usual scope.
 
 Unlike its predecessor, it ships with no default settings, granting you full customization control.
 
@@ -41,7 +41,7 @@ Explore my setup for inspiration: [View Settings](https://github.com/drcika/apc-
 
 #### Mac and Linux Users
 
-To ensure the extension works, allow VSCode or VSCodium to modify itself by fixing read-only code files and permission issues.
+To ensure the extension works, allow VSCode or [VSCodium](https://github.com/VSCodium/vscodium) to modify itself by fixing read-only code files and permission issues.
 
 > **important**
 > If you use a package manager, confirm the custom installation path before executing these commands.
@@ -63,7 +63,10 @@ To ensure the extension works, allow VSCode or VSCodium to modify itself by fixi
 |                        | VSCode Insiders | `/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/out` |
 |                        | VSCodium        | `/Applications/VSCodium.app/Contents/Resources/app/out` |
 | 🐧 **Linux** (most distros) | VSCode | `/usr/share/code` |
-| 🐧 **Arch Linux** (alternate) | VSCode | `/opt/visual-studio-code` |
+| 🐧 **Arch Linux**  | VSCode | `/opt/visual-studio-code` |
+|| VSCodium | `/usr/share/vscodium` |
+
+
 
 ## Disclaimer
 
