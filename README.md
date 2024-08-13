@@ -4,7 +4,7 @@
 
 The Successor to iocave/Customize UI
 
-![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/drcika.apc-extension?color=blue) ![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/drcika.apc-extension?color=yellow) ![Visual Studio Marketplace Version (including pre-releases)](https://img.shields.io/visual-studio-marketplace/v/drcika.apc-extension?label=latest%20Version&&color=dark-green) ![License](https://img.shields.io/github/license/drcika/apc-extension?color=red) ![GitHub Repo stars](https://img.shields.io/github/stars/drcika/apc-extension?style=social)
+![Visual Studio Marketplace Version (including pre-releases)](https://img.shields.io/visual-studio-marketplace/v/drcika.apc-extension?label=latest%20version&&color=dark-green) ![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/drcika.apc-extension?color=blue) ![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/drcika.apc-extension?color=yellow) ![License](https://img.shields.io/github/license/drcika/apc-extension?color=red) ![GitHub Repo stars](https://img.shields.io/github/stars/drcika/apc-extension?style=social)
 
 </div>
 
@@ -19,31 +19,31 @@ Explore my setup for inspiration: [View Settings](https://github.com/drcika/apc-
 ## Getting Started
 
   - Open Visual Studio Code
-  - Disable similar extensions
+  - Disable any similar extensions
   - Install this extension (auto-enabled on first install)
-  - Customize by adding configurations to your `user settings.json`
+  - Add configurations to your user [settings.json](https://code.visualstudio.com/docs/getstarted/settings#_settingsjson) to customize
 
 ## Enabling and Disabling
 
   - Open the Command Palette (Mac: <kbd>⌘</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>, Windows: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>)
   - Type `Enable Apc extension` to enable or `Disable Apc extension` to disable
 
-### Troubleshooting Extension Issues!
+## Troubleshooting Extension Issues
 
-#### Extension stopped functioning after an update
+### Extension stopped functioning after an update
 
 - To re-enable, go to the Command Palette and type `Enable Apc extension`
 
-#### Windows Users
+### Windows Users
 
 - **Single-user** installs: No admin rights required.
 - **All-user** installs: Run VSCode or VSCodium in Administrator mode.
 
-#### Mac and Linux Users
+### Mac and Linux Users
 
 To ensure the extension works, allow VSCode or [VSCodium](https://github.com/VSCodium/vscodium) to modify itself by fixing read-only code files and permission issues.
 
-> **important**
+> [!IMPORTANT]
 > If you use a package manager, confirm the custom installation path before executing these commands.
 
 #### macOS
@@ -70,13 +70,13 @@ To ensure the extension works, allow VSCode or [VSCodium](https://github.com/VSC
 
 ## Disclaimer
 
-This extension is experimental and tweaks certain VSCode / VSCodium files. <br>
+This experimental extension tweaks certain VSCode / VSCodium files. <br>
 
 > Proceed at your own risk
 
-🚀 Disable to back up original files in case of issues. <br>
-🔄 Auto-reapplies patches after each VSCode / VSCodium update. If not, re-enable it. <br>
-🐞 Report bugs on our [GitHub repository](https://github.com/drcika/apc-extension/issues)
+🚀 Disable the extension to revert to original files if you run into issues. <br>
+🔄 Patchers are automatically reapplied after each VSCode / VSCodium update. If it doesn't, re-enable the extension. <br>
+🐞 Found a bug? Report it on our [GitHub repository](https://github.com/drcika/apc-extension/issues)
 
 ---
 
@@ -86,10 +86,10 @@ This extension is experimental and tweaks certain VSCode / VSCodium files. <br>
 
 Configures the Electron window. For detailed info, see the [Electron BrowserWindow documentation](https://www.electronjs.org/docs/latest/api/browser-window#new-browserwindowoptions)
 
-> **Warning**
-> Incorrect "apc.electron" configuration can disrupt VSCode or VSCodium startup.
+> [!CAUTION]
+> Incorrect "apc.electron" settings might prevent VSCode or VSCodium from starting up.
 
-> **Note**
+> [!NOTE]
 > Here's what we covered. Choose a style you like, or create your own!
 
 #### frameless title bar
@@ -162,7 +162,8 @@ Configures the Electron window. For detailed info, see the [Electron BrowserWind
 ```
 </details>
 
-> **Note** Multiple declarations of `apc.electron` will apply only the last declaration, ignoring previous ones.
+> [!NOTE]
+> Multiple declarations of `apc.electron` will apply only the last declaration, ignoring previous ones.
 
 ### `font.family`
 
@@ -271,9 +272,9 @@ Adjust the height and font size of the header bar
 
 ```jsonc
     "apc.header": {
-      "default": number, // Applied with "window.density.editorTabHeight": "default"
-      "compact": number, // Applied wtih "window.density.editorTabHeight": "compact"
-      "height": number, // Applied when neither "default" nor "compact" is specified
+      "default": number, // For "window.density.editorTabHeight": "default"
+      "compact": number, // For "window.density.editorTabHeight": "compact"
+      "height": number, // When neither "default" nor "compact" is specified
       "fontSize": number
     }
 ```
@@ -284,9 +285,8 @@ Set the position and dimensions of the activity bar
 
 ```jsonc
     "apc.activityBar": {
-        "position": "bottom", // bottom: below sidebar (default: 'left' if unspecified)
-        // currently it only works if the position is bottom or regular
-      "size": number, // Height (when top/bottom) or width (in default position)
+      "position": "bottom", // Options: bottom, left (default). Works only with 'bottom' or default position.
+      "size": number, // Height (for bottom) or width (in default position)
       "itemSize": number, // Size of items within the bar (default: size)
       "itemMargin": number // Margin between two items (default: 3)
     }
@@ -336,10 +336,10 @@ Specify the height and font size of list rows
     // 'settings-toc-wrapper', 'settings-tree-container', 'quick-input-list', 'monaco-table', 'select-box-dropdown-list-container', 'extensions-list', 'notifications-list-container'];
 
     "apc.listRow": {
-      "lists": ["explorer-folders-view", "results"], // default if height or fontSize are provided ['customview-tree', 'results', 'open-editors', 'explorer-folders-view', 'outline-tree', 'scm-view', 'debug-view-content', 'debug-breakpoints', 'tree']
+      "lists": ["explorer-folders-view", "results"], // Default lists if height or fontSize are specified ['customview-tree', 'results', 'open-editors', 'explorer-folders-view', 'outline-tree', 'scm-view', 'debug-view-content', 'debug-breakpoints', 'tree']
       "height": number,
       "fontSize": number,
-      // by individual list
+      // Customize individual list
       "parts" : {
         "extensions-list" : {
           "height": number,
@@ -354,7 +354,7 @@ Specify the height and font size of list rows
       }
     },
 
-    // if additional styling needed
+    // Additional styling
     "stylesheet": {
       ".explorer-folders-view.custom-list-row .monaco-list-row": "font-weight: bold; color: red;"
     }
@@ -364,8 +364,8 @@ Specify the height and font size of list rows
 
 Apply custom CSS to iframes (Notebook, Extension view, etc)
 
-> **important**
-> When you start VSCode and have a tab open with an iframe, you must reopen that tab for the styles to take effect.
+> [!IMPORTANT]
+> If you have an open iframe tab when starting VSCode, reopen it to apply the styles.
 
 ```jsonc
   "apc.iframe.style": "/Users/path/style.css",
@@ -393,7 +393,7 @@ Apply custom CSS to iframes (Notebook, Extension view, etc)
 
 This extension is your go-to tool for customizing Electron and Visual Studio Code.
 
-I haven't developed anything nor provided support for potential bugs, but consider me your bridge to tailor Electron and VS Code just the way you like.
+While I haven't developed any features or provided support for bugs, think of me as your bridge to tailor Electron and VS Code just the way you like.
 
 ## Inspirations
 
