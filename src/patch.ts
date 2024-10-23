@@ -13,7 +13,7 @@ const mainProcessJsName = 'process.main.js';
 const workbenchHtmlName = 'workbench.html';
 const browserMain = 'browser.main.js';
 
-const installationPath = path.dirname(require.main!.filename);
+const installationPath = path.join(vscode.env.appRoot, 'out');
 const bootstrapPath = path.join(installationPath, bootstrapName);
 const bootstrapBackupPath = bootstrapPath + bkpName;
 const mainJsPath = path.join(installationPath, mainJsName);
@@ -113,7 +113,7 @@ function patchBootstrap(extensionPath: string) {
   // const patchedbootstrapJs = fs.readFileSync(bootstrapResourcesPath, 'utf8');
   // .replace('amdModulesPattern: \/^vs\\\/\/', `paths: { "apc": "${fixedPatchPath}" }`)
   // .replace(`performance.mark('code/fork/willLoadCode');`, inject);
-  
+
   // fs.writeFile(bootstrapPath, patchedbootstrapJs, 'utf8', () => { });
   fs.cpSync(path.join(extensionPath, "resources", bootstrapName), path.join(installationPath, bootstrapName));
   fs.cpSync(path.join(extensionPath, "resources", 'bootstrap-meta.js'), path.join(installationPath, 'bootstrap-meta.js'));
@@ -191,22 +191,22 @@ function patchWorkbench(extensionPath: string) {
       function beforeLoaderConfig(configuration, loaderConfig) {
         if (!loaderConfig) loaderConfig = configuration;
         if (typeof prevBeforeLoaderConfig === 'function') prevBeforeLoaderConfig(configuration, loaderConfig);
-        require.define("apc-patch", { 
-          load: (name, req, onload, config) => req([name], 
-          (value) => req(["vs/modules/main"], 
-          () => onload(value), 
+        require.define("apc-patch", {
+          load: (name, req, onload, config) => req([name],
+          (value) => req(["vs/modules/main"],
+          () => onload(value),
           error => (console.error(error), onload(value))))
         });
       };
       options.beforeLoaderConfig = beforeLoaderConfig;
-  
+
       if ('vs/workbench/workbench.desktop.main' === modulePaths[0]) modulePaths[0] = 'apc-patch!' + modulePaths[0];
       return _prev(modulePaths, resultCallback, options);
     };
-  
+
     bootstrapWindow.load = bootstrapWindowLoad;
   }
-  
+
   if (window.MonacoBootstrapWindow) _apcPatch(window.MonacoBootstrapWindow);
   else {
     Object.defineProperty(
